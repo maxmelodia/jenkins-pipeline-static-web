@@ -1,0 +1,26 @@
+# Logs e cache
+*.log
+*.tmp
+*.swp
+
+# Diretórios de build
+build/
+dist/
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Jenkins e Docker
+jenkins_home/
+docker-data/
+.env
+
+# Node (caso use npm futuramente pra validar HTML ou CSS)
+node_modules/
+
+# VSCode
+.vscode/
+
+# Arquivos de backup
+*~
