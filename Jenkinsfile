@@ -59,22 +59,48 @@ pipeline {
             }
         } 
 
-        stage('Validate') {
+        stage('Parallel Validation') {
             when {
                 equals expected: true, actual: params.RUN_VALIDATION
             }
-            steps {
-                echo "Validating site structure..."
-                sh '''
-                    if [ ! -f build/index.html ]; then
-                        echo "Missing index.html"
-                        exit 1
-                    fi
-                    if [ ! -f build/style.css ]; then
-                        echo "Warning: style.css not found"
-                    fi
-                    echo "Validation completed successfully"
-                '''
+            parallel {
+                stage('HTML Check') {
+                    steps {
+                        sh '''
+                            echo "🔍 Checking HTML structure..."
+                            sleep 1
+                            if [ ! -f build/index.html ]; then
+                                echo "Missing index.html"
+                                exit 1
+                            fi
+                            echo "HTML check passed!"
+                        '''
+                    }
+                }
+                stage('CSS Check') {
+                    steps {
+                        sh '''
+                            echo "Checking CSS files..."
+                            sleep 2
+                            if [ ! -f build/style.css ]; then
+                                echo "Missing style.css (non-blocking warning)"
+                            fi
+                            echo "CSS check completed!"
+                        '''
+                    }
+                }
+                stage('JS Check') {
+                    steps {
+                        sh '''
+                            echo "Checking JS files..."
+                            sleep 3
+                            if [ ! -f build/script.js ]; then
+                                echo "Missing script.js (optional)"
+                            fi
+                            echo "JS check finished!"
+                        '''
+                    }
+                }
             }
         }
 
