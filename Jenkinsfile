@@ -35,7 +35,7 @@ pipeline {
     }
 
     triggers {
-        pollSCM('H/1 * * * *')
+        pollSCM('H/30 * * * *')
     }    
 
     stages {
@@ -48,4 +48,44 @@ pipeline {
             }
         }
     }
+
+    stage('Build') {
+        steps {
+            echo "Building static site..."
+            sh '''
+                mkdir -p build
+                cp -r site/* build/
+                echo "Build folder created successfully!"
+            '''
+        }
+    } 
+
+    stage('Validate') {
+        when {
+            equals expected: true, actual: params.RUN_VALIDATION
+        }
+        steps {
+            echo "🔍 Validating site structure..."
+            sh '''
+                if [ ! -f build/index.html ]; then
+                    echo "Missing index.html"
+                    exit 1
+                fi
+                if [ ! -f build/style.css ]; then
+                    echo "Warning: style.css not found"
+                fi
+                echo "Validation completed successfully"
+            '''
+        }
+    }
+
+    post {
+        success {
+            echo "${env.APP_NAME} built and validated successfully!"
+        }
+        failure {
+            echo "Build failed. Check logs for details."
+        }
+    }    
+    
 }
