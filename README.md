@@ -15,4 +15,4 @@ A tarefa consiste em criar um Jenkinsfile (ou de qualquer outra ferramenta) , qu
     Parallel Stages
     Matrix
 
-Deve ser entregue o arquivo e, caso seja necessário instalar algum plugin para sua pipeline funcionar, uma listagem destes plugins.
+Deve ser entregue o arquivo e, caso seja necessário instalar algum plugin para sua pipeline funcionar, uma listagem destes plugins.auto-trigger test Wed Oct  8 22:45:11 -03 2025
