@@ -67,7 +67,7 @@ pipeline {
                 stage('HTML Check') {
                     steps {
                         sh '''
-                            echo "🔍 Checking HTML structure..."
+                            echo "Checking HTML structure..."
                             sleep 1
                             if [ ! -f build/index.html ]; then
                                 echo "Missing index.html"
@@ -142,6 +142,33 @@ pipeline {
                 }
             }
         }
+
+        stage('Matrix Deploy Simulation') {
+            when {
+                equals expected: 'production', actual: params.DEPLOY_MODE
+            }
+            matrix {
+                axes {
+                    axis {
+                        name 'REGION'
+                        values 'us-east-1', 'eu-west-1'
+                    }
+                }
+                stages {
+                    stage('Regional Deploy') {
+                        steps {
+                            echo "Deploying ${env.APP_NAME} to region: ${REGION}"
+                            sh '''
+                                echo "Connecting to simulated server in ${REGION}..."
+                                sleep 2
+                                echo "Deployment to ${REGION} completed successfully!"
+                            '''
+                        }
+                    }
+                }
+            }
+        }
+
 
         
     }
