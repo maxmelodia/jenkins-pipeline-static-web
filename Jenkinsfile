@@ -8,11 +8,9 @@ pipeline {
     }
 
     options {
-        // mantém apenas os 5 últimos builds
         buildDiscarder(logRotator(numToKeepStr: '5'))
-        // impede dois builds simultâneos da mesma branch
         disableConcurrentBuilds()
-        // mostra timestamp em cada log
+        ansiColor('xterm')
         timestamps()
     }
 
@@ -41,10 +39,10 @@ pipeline {
     stages {
         stage('Init') {
             steps {
-                echo "Starting ${env.APP_NAME} build"
-                echo "Branch selected: ${params.BRANCH}"
-                echo "Deploy mode: ${params.DEPLOY_MODE}"
-                echo "Validation enabled? ${params.RUN_VALIDATION}"
+                sh 'echo "Starting ${env.APP_NAME} build"'
+                sh 'echo "Branch selected: ${params.BRANCH}"'
+                sh 'echo "Deploy mode: ${params.DEPLOY_MODE}"'
+                sh 'echo "Validation enabled? ${params.RUN_VALIDATION}"'
             }
         }
 
@@ -64,7 +62,7 @@ pipeline {
                 equals expected: true, actual: params.RUN_VALIDATION
             }
             steps {
-                echo "🔍 Validating site structure..."
+                echo "Validating site structure..."
                 sh '''
                     if [ ! -f build/index.html ]; then
                         echo "Missing index.html"
