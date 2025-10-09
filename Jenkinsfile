@@ -47,35 +47,35 @@ pipeline {
                 echo "Validation enabled? ${params.RUN_VALIDATION}"
             }
         }
-    }
 
-    stage('Build') {
-        steps {
-            echo "Building static site..."
-            sh '''
-                mkdir -p build
-                cp -r site/* build/
-                echo "Build folder created successfully!"
-            '''
-        }
-    } 
+        stage('Build') {
+            steps {
+                echo "Building static site..."
+                sh '''
+                    mkdir -p build
+                    cp -r site/* build/
+                    echo "Build folder created successfully!"
+                '''
+            }
+        } 
 
-    stage('Validate') {
-        when {
-            equals expected: true, actual: params.RUN_VALIDATION
-        }
-        steps {
-            echo "🔍 Validating site structure..."
-            sh '''
-                if [ ! -f build/index.html ]; then
-                    echo "Missing index.html"
-                    exit 1
-                fi
-                if [ ! -f build/style.css ]; then
-                    echo "Warning: style.css not found"
-                fi
-                echo "Validation completed successfully"
-            '''
+        stage('Validate') {
+            when {
+                equals expected: true, actual: params.RUN_VALIDATION
+            }
+            steps {
+                echo "🔍 Validating site structure..."
+                sh '''
+                    if [ ! -f build/index.html ]; then
+                        echo "Missing index.html"
+                        exit 1
+                    fi
+                    if [ ! -f build/style.css ]; then
+                        echo "Warning: style.css not found"
+                    fi
+                    echo "Validation completed successfully"
+                '''
+            }
         }
     }
 
@@ -87,5 +87,5 @@ pipeline {
             echo "Build failed. Check logs for details."
         }
     }    
-    
+
 }
