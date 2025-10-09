@@ -77,6 +77,26 @@ pipeline {
                 '''
             }
         }
+
+        stage('Approval') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'DeployApproval',
+                        message: 'Do you want to deploy this build?',
+                        parameters: [
+                            choice(name: 'CONFIRM_DEPLOY', choices: ['No', 'Yes'], description: 'Approve deployment?')
+                        ]
+                    )
+                    echo "User selected: ${userInput}"
+
+                    if (userInput == 'No') {
+                        error('Deployment was cancelled by the user.')
+                    }
+                }
+            }
+        }
+        
     }
 
     post {
