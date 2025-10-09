@@ -96,6 +96,27 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            when {
+                allOf {
+                    equals expected: 'production', actual: params.DEPLOY_MODE
+                }
+            }
+            steps {
+                echo "Starting deployment to ${params.DEPLOY_MODE} environment..."
+
+                withCredentials([string(credentialsId: 'fake-deploy-token', variable: 'DEPLOY_KEY')]) {
+                    sh '''
+                        echo "Uploading build folder to simulated server..."
+                        echo "Using deploy key: $DEPLOY_KEY"
+                        sleep 2
+                        echo "Deployment to ${DEPLOY_MODE} completed successfully!"
+                    '''
+                }
+            }
+        }
+
         
     }
 
