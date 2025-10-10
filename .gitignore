@@ -24,3 +24,11 @@ node_modules/
 
 # Arquivos de backup
 *~
+
+# dentro do .gitignore
+*.psd
+*.xcf
+*.zip
+*.rar
+*.bak
+*.tmp
