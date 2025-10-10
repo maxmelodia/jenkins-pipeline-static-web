@@ -105,10 +105,9 @@ O pipeline utiliza credenciais simuladas para representar um processo seguro de 
 
 ---
 
-## 8. Próximos passos
-1. Adicionar screenshots da pipeline (Stage View / Blue Ocean)  
+## 8. Artefatos de execução
 
-### Gráfico de excução completa
+### Gráfico de excução
 ![Steps](docs/images/pipeline-graph.png)
 
 ### Log de excução 
@@ -166,5 +165,10 @@ Status: SUCCESS
 ---
 
 ## 9. Autor
-Projeto desenvolvido por **Maxwell Duarte**  
-Pós-graduação em DevOps — PUC Minas
+Este projeto foi desenvolvido por **Maxwell Roberto Duarte** como parte da disciplina de Continuous Integration & Deployment (Ci/Cd) do curso de pós-graduação em DevOps & Continuous Software Engineering - PUC Minas.
+
+- 💼 GitHub: [@maxmelodia](https://github.com/maxmelodia)
+- 📫 E-mail: maxmelodia@gmail.com
+- 🌐 Matrícula: 229598
+---
+[<img loading="lazy" alt="maxmelodia" src="https://github.com/maxmelodia.png?size=70" width="40" height="40">](https://github.com/maxmelodia) [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/maxmelodia)](https://github.com/maxmelodia) [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/maxwell-roberto/)](https://www.linkedin.com/in/maxwell-roberto/) [![Youtube Badge](https://img.shields.io/badge/-YouTube-ff0000?style=flat-square&labelColor=ff0000&logo=youtube&logoColor=white&link=https://www.youtube.com/user/maxmelodia)](https://www.youtube.com/user/maxmelodia)
