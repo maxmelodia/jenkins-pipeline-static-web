@@ -25,7 +25,7 @@ node_modules/
 # Arquivos de backup
 *~
 
-# dentro do .gitignore
+# Arquivos pesados
 *.psd
 *.xcf
 *.zip
